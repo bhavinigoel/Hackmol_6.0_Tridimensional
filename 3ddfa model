@@ -13,3 +13,6 @@ os.environ["PATH"] = "/usr/local/miniconda/bin:" + os.environ["PATH"]
 !source /usr/local/miniconda/bin/activate TDDFAV3
 !which python
 !source /usr/local/miniconda/bin/activate TDDFAV3 && which python
+!pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+%cd /content/3DDFA-V3/
+!pip install -r requirements.txt
