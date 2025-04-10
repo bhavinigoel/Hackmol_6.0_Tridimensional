@@ -63,7 +63,8 @@ from pyngrok import ngrok
 from pyngrok import ngrok
 ngrok.set_auth_token("2uMWVUGqdhDhw8QLoiQkeVywYwW_6QaNdJLEmk3WvxUrjWzpN")
 !pip install fastapi uvicorn python-multipart pyngrok
-
+!pip install flask flask-ngrok
+!pip install flask-cors
 
 
 
