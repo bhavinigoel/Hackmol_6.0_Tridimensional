@@ -80,7 +80,9 @@ from pyngrok import ngrok
 # Start ngrok on port 3000
 public_url = ngrok.connect(5000)
 print(f"🚀 Public URL: {public_url}")
-
+! lsof -i :5000
+! kill -9 1851  # Replace 12345 with the actual PID
+  # Replace 12345 with the actual PID
 
 
 
