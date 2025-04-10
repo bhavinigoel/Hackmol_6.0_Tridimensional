@@ -38,6 +38,24 @@ os.environ["PATH"] = "/usr/local/miniconda/bin:" + os.environ["PATH"]
 # Go back to the main project directory
 %cd /content/3DDFA-V3
 
+!wget -P assets https://huggingface.co/datasets/Zidu-Wang/3DDFA-V3/resolve/main/assets/face_model.npy
+!wget -P assets https://huggingface.co/datasets/Zidu-Wang/3DDFA-V3/resolve/main/assets/net_recon.pth
+!wget -P assets https://huggingface.co/datasets/Zidu-Wang/3DDFA-V3/resolve/main/assets/large_base_net.pth
+!wget -P assets https://huggingface.co/datasets/Zidu-Wang/3DDFA-V3/resolve/main/assets/retinaface_resnet50_2020-07-20_old_torch.pth
+!wget -P assets https://huggingface.co/datasets/Zidu-Wang/3DDFA-V3/resolve/main/assets/similarity_Lm3D_all.mat
+
+mkdir -p /content/3DDFA-V3/my_images
+mkdir -p /content/3DDFA-V3/my_images/results
+!pip list | grep numpy  # Check installed NumPy version
+!pip uninstall -y numpy
+!pip uninstall -y numpy  # Run it twice to ensure complete removal
+!rm -rf /usr/local/lib/python3.*/dist-packages/numpy*
+!rm -rf /usr/local/miniconda/lib/python3.*/site-packages/numpy*
+!pip install numpy==1.26.4
+import numpy as np
+print(np.__version__)  # Should print 1.26.4 or similar
+!python demo.py --inputpath /content/3DDFA-V3/my_images --savepath /content/3DDFA-V3/my_images/results --device cpu --iscrop 1 --detector retinaface --ldm68 1 --useTex 1 --extractTex 1 --backbone resnet50
+!pip show pyngrok
 
 
 
