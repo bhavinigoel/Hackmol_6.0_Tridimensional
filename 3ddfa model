@@ -56,8 +56,13 @@ import numpy as np
 print(np.__version__)  # Should print 1.26.4 or similar
 !python demo.py --inputpath /content/3DDFA-V3/my_images --savepath /content/3DDFA-V3/my_images/results --device cpu --iscrop 1 --detector retinaface --ldm68 1 --useTex 1 --extractTex 1 --backbone resnet50
 !pip show pyngrok
+import sys
+sys.path.append("/usr/local/miniconda/lib/python3.12/site-packages")
 
-
+from pyngrok import ngrok
+from pyngrok import ngrok
+ngrok.set_auth_token("2uMWVUGqdhDhw8QLoiQkeVywYwW_6QaNdJLEmk3WvxUrjWzpN")
+!pip install fastapi uvicorn python-multipart pyngrok
 
 
 
