@@ -16,3 +16,14 @@ os.environ["PATH"] = "/usr/local/miniconda/bin:" + os.environ["PATH"]
 !pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 %cd /content/3DDFA-V3/
 !pip install -r requirements.txt
+!pip install pyngrok
+!git clone https://github.com/NVlabs/nvdiffrast.git
+!cd nvdiffrast
+!pip install .
+!cd ..
+!ls nvdiffrast
+%cd /content/3DDFA-V3/nvdiffrast
+!pip install .
+%cd nvdiffrast/util/cython_renderer/
+!python setup.py build_ext -i
+%cd ../../..
