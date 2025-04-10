@@ -6,3 +6,7 @@
 !rm miniconda.sh
 !export PATH="/usr/local/miniconda/bin:$PATH"
 !conda init bash
+import os
+os.environ["PATH"] = "/usr/local/miniconda/bin:" + os.environ["PATH"]
+!conda --version
+!conda create -n TDDFAV3 python=3.8 -y
