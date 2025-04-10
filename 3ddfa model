@@ -155,6 +155,65 @@ thread.start()
 
 print("🚀 Flask is running in the background! You can now run other cells.")
 
+!curl -X POST -F "file=@/content/3DDFA-V3/my_images/samplei.png" https://0dd4-34-148-106-178.ngrok-free.app////upload
+
+import threading
+from flask import Flask, request, send_file, jsonify
+from pathlib import Path
+import os
+import glob
+import subprocess
+
+app = Flask(__name__)
+
+# Define paths
+input_dir = Path("/content/3DDFA-V3/my_images")
+output_dir = Path("/content/3DDFA-V3/my_images/results")
+input_dir.mkdir(parents=True, exist_ok=True)
+output_dir.mkdir(parents=True, exist_ok=True)
+
+@app.route("/")
+def home():
+    return jsonify({"message": "3D Face Reconstruction API is running! Use /upload to process an image."})
+
+@app.route("/upload", methods=["POST"])
+def upload_image():
+    if "file" not in request.files:
+        return jsonify({"error": "No file provided"}), 400
+
+    file = request.files["file"]
+    save_path = input_dir / file.filename
+    file.save(save_path)
+
+    # Run the model
+    command = f"python demo.py --inputpath {input_dir} --savepath {output_dir} --device cpu --iscrop 1 --detector retinaface --ldm68 1 --useTex 1 --extractTex 1 --backbone resnet50"
+    subprocess.run(command, shell=True)
+
+    # Search for .obj files in subdirectories
+    obj_files = glob.glob(f"{output_dir}/{file.filename.split('.')[0]}/**/*.obj", recursive=True)
+
+    if obj_files:
+        obj_filename = obj_files[0].split("/")[-1]  # Extract filename only
+        return jsonify({"message": "Processing completed", "obj_file": f"/download/{obj_filename}"}), 200
+    else:
+        return jsonify({"error": "OBJ file not found"}), 404
+
+@app.route("/download/<filename>", methods=["GET"])
+def download_file(filename):
+    file_paths = glob.glob(f"{output_dir}/**/{filename}", recursive=True)
+    if file_paths:
+        return send_file(file_paths[0], as_attachment=True)
+    return jsonify({"error": "File not found"}), 404
+
+# Function to run Flask in a separate thread
+def run_flask():
+    app.run(host="0.0.0.0", port=5000)
+
+# Start Flask in a thread
+thread = threading.Thread(target=run_flask, daemon=True)
+thread.start()
+
+print("🚀 Flask is running in the background! You can now run other cells.")
 
 
 
