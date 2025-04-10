@@ -27,3 +27,5 @@ os.environ["PATH"] = "/usr/local/miniconda/bin:" + os.environ["PATH"]
 %cd nvdiffrast/util/cython_renderer/
 !python setup.py build_ext -i
 %cd ../../..
+!ls -R /content/3DDFA-V3/nvdiffrast
+!pip install cython
