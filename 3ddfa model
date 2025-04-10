@@ -219,4 +219,6 @@ print("🚀 Flask is running in the background! You can now run other cells.")
 ! ps aux | grep flask
 ! curl -X POST "https://30d4-34-56-34-230.ngrok-free.app/upload" \
      -F "file=@/content/3DDFA-V3/my_images/shubman-gill.png"
-
+!curl -X POST "https://c6a6-34-56-34-230.ngrok-free.app//upload" -F "file=@//content/3DDFA-V3/my_images"
+#download
+!pip install mtcnn
