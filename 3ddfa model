@@ -212,8 +212,11 @@ def run_flask():
 # Start Flask in a thread
 thread = threading.Thread(target=run_flask, daemon=True)
 thread.start()
-
 print("🚀 Flask is running in the background! You can now run other cells.")
-
-
+!ls /content/3DDFA-V3/my_images/results
+!ps aux | grep ngrok
+!ps -9 33565
+! ps aux | grep flask
+! curl -X POST "https://30d4-34-56-34-230.ngrok-free.app/upload" \
+     -F "file=@/content/3DDFA-V3/my_images/shubman-gill.png"
 
