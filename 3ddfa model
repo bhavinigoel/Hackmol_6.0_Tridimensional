@@ -223,6 +223,22 @@ print("🚀 Flask is running in the background! You can now run other cells.")
 #download
 !pip install mtcnn
 !pip uninstall torch torchvision torchaudio -y
+import matplotlib.pyplot as plt
+import cv2
+import glob
+
+# Path to results
+result_images = glob.glob("/content/3DDFA-V3/my_images/results/*.jpg")  # Change to .png if needed
+
+# Show first 5 images
+for img_path in result_images[:5]:
+    img = cv2.imread(img_path)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    plt.figure(figsize=(5,5))
+    plt.imshow(img)
+    plt.axis("off")
+    plt.show()
+
 !pip cache purge
 !pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 !python --version
