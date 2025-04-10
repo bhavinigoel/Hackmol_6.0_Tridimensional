@@ -71,7 +71,15 @@ app = Flask(__name__)
 CORS(app)  # Allow all origins
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})  # Adjust port if needed
 !nohup python -u app.py > flask.log 2>&1 &
+!pip install pyngrok
+from pyngrok import ngrok
 
+# Kill any previous ngrok process
+!pkill -f ngrok
+
+# Start ngrok on port 3000
+public_url = ngrok.connect(5000)
+print(f"🚀 Public URL: {public_url}")
 
 
 
