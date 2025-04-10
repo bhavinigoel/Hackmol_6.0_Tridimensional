@@ -222,3 +222,8 @@ print("🚀 Flask is running in the background! You can now run other cells.")
 !curl -X POST "https://c6a6-34-56-34-230.ngrok-free.app//upload" -F "file=@//content/3DDFA-V3/my_images"
 #download
 !pip install mtcnn
+!pip uninstall torch torchvision torchaudio -y
+!pip cache purge
+!pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+!python --version
+!pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118
